@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Name=Thakir PrayerTimes
+Name[en_GB]=Thakir PrayerTimes
+Name[fr]=Thakir PrayerTimes
+Categories=Utility;
+Icon=harbour-thakir_prayer_times
+Exec=harbour-thakir_prayer_times
