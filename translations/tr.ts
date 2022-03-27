@@ -54,16 +54,16 @@
 <context>
     <name>AdhanSelectDialog</name>
     <message>
-        <source>Up</source>
-        <translation>Yukarı</translation>
+        <source>Athan</source>
+        <translation>Ezan</translation>
     </message>
     <message>
-        <source>Select</source>
-        <translation>Seçiniz</translation>
+        <source>None</source>
+        <translation>Hiçbiri</translation>
     </message>
     <message>
-        <source>No sound files here.</source>
-        <translation>Ses dosyası yok.</translation>
+        <source>Select Athan file!</source>
+        <translation>Athan dosyasını seçin!</translation>
     </message>
 </context>
 <context>
@@ -167,6 +167,10 @@
         <source>Stop Adhan/Athkar by turning the device face down</source>
         <translation>Adhan ve Adkar&apos;ı durdurmak için cihazı çevirin</translation>
     </message>
+    <message>
+        <source>Select Athan file!</source>
+        <translation>Athan dosyasını seçin!</translation>
+    </message>
 </context>
 <context>
     <name>Athkar</name>
@@ -224,6 +228,77 @@
     </message>
 </context>
 <context>
+    <name>Ayat</name>
+    <message>
+        <source>Show Tafssir/Translation</source>
+        <translation>Tefsiri/Çeviriyi Göster</translation>
+    </message>
+    <message>
+        <source>Show Quran</source>
+        <translation>Kuran&apos;ı göster</translation>
+    </message>
+    <message>
+        <source>Sourat: </source>
+        <translation>Surat: </translation>
+    </message>
+    <message>
+        <source>(Tafssir muyassar)</source>
+        <translation>(muyasar&apos;in açıklaması)</translation>
+    </message>
+    <message>
+        <source>(Tafssir jalalayn)</source>
+        <translation>(Jalilin&apos;in açıklaması)</translation>
+    </message>
+    <message>
+        <source>(Translation)</source>
+        <translation>(anlamların çevirisi)</translation>
+    </message>
+    <message>
+        <source>Copy this Aya</source>
+        <translation>Bu ayeti kopyala</translation>
+    </message>
+    <message>
+        <source>Play from this Aya</source>
+        <translation>Bu ayetten okuma</translation>
+    </message>
+    <message>
+        <source>Share</source>
+        <translation>Paylaş</translation>
+    </message>
+    <message>
+        <source>Aya is copied to clipboard.</source>
+        <translation>Aya panoya kopyalanır.</translation>
+    </message>
+    <message>
+        <source>Share Aya</source>
+        <translation>Aya&apos;yı paylaşın</translation>
+    </message>
+    <message>
+        <source>Thakir Prayer Times</source>
+        <translation>Thakir Prayer Times</translation>
+    </message>
+    <message>
+        <source>Can&apos;t play soura! Downlod it first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Hata</translation>
+    </message>
+    <message>
+        <source>Click on this notification to go to the page of downloading.</source>
+        <translation>İndirme sayfasına gitmek için bu bildirime tıklayın.</translation>
+    </message>
+    <message>
+        <source>Ignore the problem</source>
+        <translation>Sorunu görmezden gel</translation>
+    </message>
+    <message>
+        <source>Can&apos;t play soura! Download it first.</source>
+        <translation>Surenin okunuşunu duymak mümkün değil, önce indirilmesi gerekiyor.</translation>
+    </message>
+</context>
+<context>
     <name>City</name>
     <message>
         <source>Choose City</source>
@@ -254,6 +329,70 @@
     <message>
         <source>Adhan is actived</source>
         <translation>Ezanı aç</translation>
+    </message>
+</context>
+<context>
+    <name>DownloadManager</name>
+    <message>
+        <source>Files downloaded successfully: %1 of %2</source>
+        <translation>Dosyalar başarıyla indirildi: %1 / %2</translation>
+    </message>
+    <message>
+        <source>Problem opening save file &apos;%1&apos; for download &apos;%2&apos;: %3</source>
+        <translation>Kayıt dosyasını açarken sorun &apos;%1&apos; indirmek için &apos;%2&apos; : %3</translation>
+    </message>
+    <message>
+        <source>Loading ...
+ %1</source>
+        <translation>Yükleniyor ...
+ %1</translation>
+    </message>
+    <message>
+        <source>Failed: %1</source>
+        <translation>Başarısız: %1</translation>
+    </message>
+    <message>
+        <source>nothing</source>
+        <translation>hiç bir şey</translation>
+    </message>
+    <message>
+        <source>Achieved.</source>
+        <translation>başarıldı.</translation>
+    </message>
+</context>
+<context>
+    <name>DownloadSura</name>
+    <message>
+        <source>The status: </source>
+        <translation>Durum: </translation>
+    </message>
+    <message>
+        <source>Download Surah: </source>
+        <translation>Sureyi İndirin: </translation>
+    </message>
+    <message>
+        <source>Active Downloads: </source>
+        <translation>Etkin indirmeler: </translation>
+    </message>
+    <message>
+        <source>nothing</source>
+        <translation>hiç bir şey</translation>
+    </message>
+    <message>
+        <source>Errors: </source>
+        <translation>Hatalar: </translation>
+    </message>
+    <message>
+        <source>Stop all downloads</source>
+        <translation>Tüm indirmeleri durdur</translation>
+    </message>
+    <message>
+        <source>Click here to download the audio files</source>
+        <translation>Dosyaları indirmek için buraya tıklayın</translation>
+    </message>
+    <message>
+        <source>Please enable connection first!</source>
+        <translation>İnternet bağlantısı yok!</translation>
     </message>
 </context>
 <context>
@@ -309,16 +448,8 @@
 <context>
     <name>PrayerTimes</name>
     <message>
-        <source>About</source>
-        <translation>Hakkında</translation>
-    </message>
-    <message>
         <source>Favorites</source>
         <translation>Favoriler</translation>
-    </message>
-    <message>
-        <source>Location Settings</source>
-        <translation>Bölgesel Ayarlar</translation>
     </message>
     <message>
         <source>Direction of Quibla</source>
@@ -373,24 +504,8 @@
         <translation>İkindi</translation>
     </message>
     <message>
-        <source>Alert Settings</source>
-        <translation>Uyarı Ayarları</translation>
-    </message>
-    <message>
-        <source>Time Adjustments</source>
-        <translation>Vakit Düzeltmeleri</translation>
-    </message>
-    <message>
         <source>Stop Adhan</source>
         <translation>Ezanı durdur</translation>
-    </message>
-    <message>
-        <source>Silent Mode Settings</source>
-        <translation>Sessiz Mod Ayarları</translation>
-    </message>
-    <message>
-        <source>Listening to some Athkar</source>
-        <translation>Bazı Athkar&apos;ı dinlemek</translation>
     </message>
 </context>
 <context>
@@ -428,11 +543,146 @@
     </message>
 </context>
 <context>
-    <name>SettingsLocation</name>
+    <name>Settings-Quran</name>
     <message>
-        <source>Enable Location Services: You must have Location Services turned on to use GPS ...Go to your device&apos;s Settings menu and select Location.</source>
-        <translation>Konum servisini aktif edin: Konum Servisini kullanmak için GPS&apos;i açmalısınız. Cihazınızın Ayarlar menüsünden Konuma tıklayınız</translation>
+        <source>Select font</source>
+        <translation>Yazı tipi seçin</translation>
     </message>
+    <message>
+        <source>[Load]</source>
+        <translation>[Yük]</translation>
+    </message>
+    <message>
+        <source>Load Quran XML file</source>
+        <translation>Kuran XML dosyasını yükle</translation>
+    </message>
+    <message>
+        <source>Settings Quran</source>
+        <translation>Ayarlar Kuran</translation>
+    </message>
+    <message>
+        <source>Simple plain</source>
+        <translation>tek düz</translation>
+    </message>
+    <message>
+        <source>ar.muyassar</source>
+        <translation>ar.muyassar</translation>
+    </message>
+    <message>
+        <source>ar.jalalayn</source>
+        <translation>ar.jalalayn</translation>
+    </message>
+    <message>
+        <source>Fonts</source>
+        <translation>Fontlar</translation>
+    </message>
+    <message>
+        <source>System font</source>
+        <translation>Sistem fontu</translation>
+    </message>
+    <message>
+        <source>Fontsize</source>
+        <translation>Yazı Boyutu</translation>
+    </message>
+    <message>
+        <source>tiny</source>
+        <translation>Minik</translation>
+    </message>
+    <message>
+        <source>extra small</source>
+        <translation>çok küçük</translation>
+    </message>
+    <message>
+        <source>small</source>
+        <translation>küçük</translation>
+    </message>
+    <message>
+        <source>medium</source>
+        <translation>orta</translation>
+    </message>
+    <message>
+        <source>large</source>
+        <translation>büyük</translation>
+    </message>
+    <message>
+        <source>extra large</source>
+        <translation>ekstra geniş</translation>
+    </message>
+    <message>
+        <source>Screen blanking</source>
+        <translation>Ekran koruyucu aktivasyonu</translation>
+    </message>
+    <message>
+        <source>system</source>
+        <translation>sistem</translation>
+    </message>
+    <message>
+        <source>disabled</source>
+        <translation>engelli</translation>
+    </message>
+    <message>
+        <source>Quran</source>
+        <translation>kuran</translation>
+    </message>
+    <message>
+        <source>Custom (xml file)</source>
+        <translation>Özel (xml dosyası)</translation>
+    </message>
+    <message>
+        <source>Custom (font file)</source>
+        <translation>Özel (font dosyası)</translation>
+    </message>
+    <message>
+        <source>Taffssir/Translations</source>
+        <translation>Tefsir/Çeviriler</translation>
+    </message>
+    <message>
+        <source>Recitations</source>
+        <translation>alıntılar</translation>
+    </message>
+    <message>
+        <source>Load Quran translation XML file</source>
+        <translation>Kuran çevirisi XML dosyasını yükle</translation>
+    </message>
+    <message>
+        <source>Sheikh Saad Al-Ghamdi</source>
+        <translation>Cheikh Saad Al-Ghamdi</translation>
+    </message>
+    <message>
+        <source>Sheikh Ali bin Abdul Rahman Al-Hudhaifi</source>
+        <translation>Şeyh Ali bin Abdul Rahman Al-Hudhaifi</translation>
+    </message>
+    <message>
+        <source>Sheikh Abdul Rahman Al-Sudais</source>
+        <translation>Şeyh Abdul Rahman Al-Sudais</translation>
+    </message>
+    <message>
+        <source>Sheikh Muhammad Siddiq Al-Minshawi</source>
+        <translation>Şeyh Muhammed Sıddık Al-Minshawi</translation>
+    </message>
+    <message>
+        <source>Sheikh Fares Abbad</source>
+        <translation>Şeyh Fares Abbad</translation>
+    </message>
+    <message>
+        <source>Sheikh Abdul Basit Abdul Samad -Recitation-</source>
+        <translation>Şeyh Abdul Basit Abdul Samad - Okuma -</translation>
+    </message>
+    <message>
+        <source>Sheikh Abdul Basit Abdul Samad -Tajweed-</source>
+        <translation>Şeyh Abdul Basit Abdul Samad -Tajweed-</translation>
+    </message>
+    <message>
+        <source>Sheikh Maher Al-Muaiqly</source>
+        <translation>Şeyh Maher Al Muaiqly</translation>
+    </message>
+    <message>
+        <source>Sheikh Mahmoud Khalil Al-Hosary</source>
+        <translation>Şeyh Mahmud Halil El-Hosary</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsLocation</name>
     <message>
         <source>City</source>
         <translation>Şehir</translation>
@@ -652,6 +902,48 @@
     <message>
         <source>ANGLE_BASED</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Location Services: You must have Location Services turned on to use GPS... Go first to your device&apos;s Settings menu and select Location and restart the application.</source>
+        <translation>Konum Servislerini Etkinleştir: GPS&apos;i kullanmak için Konum Servislerini açmış olmanız gerekir... Önce cihazınızın Ayarlar menüsüne gidin ve Konum&apos;u seçin ve uygulamayı yeniden başlatın.</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsPage</name>
+    <message>
+        <source>Quran Settings</source>
+        <translation>Kuran Ayarları</translation>
+    </message>
+    <message>
+        <source>Location Settings</source>
+        <translation>Bölgesel Ayarlar</translation>
+    </message>
+    <message>
+        <source>Alert Settings</source>
+        <translation>Uyarı Ayarları</translation>
+    </message>
+    <message>
+        <source>Silent Mode Settings</source>
+        <translation>Sessiz Mod Ayarları</translation>
+    </message>
+    <message>
+        <source>Time Adjustments</source>
+        <translation>Zaman Ayarlamaları</translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation>Hakkında</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Ayarlar</translation>
+    </message>
+</context>
+<context>
+    <name>Souwar</name>
+    <message>
+        <source>El Souar</source>
+        <translation>ayetleri</translation>
     </message>
 </context>
 <context>
