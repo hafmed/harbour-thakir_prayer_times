@@ -1,6 +1,7 @@
 #ifndef SETTINGS_HPP_
 #define SETTINGS_HPP_
-
+#include <QSettings>
+#include <QStandardPaths>
 #include <QObject>
 
 class Settings: public QObject {
@@ -29,6 +30,9 @@ public:
 * @param objectName Index path to the item
 * @param inputValue new value to the QSettings database
 */
+//        Q_INVOKABLE
+//        void migrateSettings();
+
         Q_INVOKABLE
         void saveValueFor(const QString &objectName, const QString &inputValue);
 
@@ -37,6 +41,9 @@ public:
 
         Q_INVOKABLE
         void clearAll();
+
+private:
+            QSettings *settings;
 };
 
 #endif

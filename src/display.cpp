@@ -38,8 +38,8 @@
 #include "display.h"
 
 static void checkError(QDBusMessage &msg) {
-    if (msg.type() == QDBusMessage::ErrorMessage)
-        qDebug() << msg.errorName() << msg.errorMessage();
+    //if (msg.type() == QDBusMessage::ErrorMessage)
+        //qDebug() << msg.errorName() << msg.errorMessage();
 }
 
 Display::Display(QObject *parent) :
@@ -66,7 +66,7 @@ bool Display::isLocked() {
     //QDBusReply<QString> reply = mceInterface.call("get_display_status");
     QDBusReply<QString> reply = mceInterface.call("get_tklock_mode");
     if (reply.isValid()) {
-        //qDebug() << "reply" << reply.value();
+        ////qDebug() << "reply" << reply.value();
         if(reply.value() == "unlocked") {
             return false;
         } else {
@@ -74,7 +74,7 @@ bool Display::isLocked() {
         }
     } else {
         QDBusError error = reply.error();
-        qDebug() << error.name() << error.message();
+        //qDebug() << error.name() << error.message();
         // returning true as state is unknown
         return true;
     }

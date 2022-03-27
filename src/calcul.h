@@ -79,7 +79,7 @@ public:
     //-------------------
     int volumeAthan;
     int athanIsPlaying;
-
+    int QuranIsPlaying;
     //-----------------
 
     bool alertehaseplayed;
@@ -123,9 +123,24 @@ public:
     int playAthkarMassaChecked;
     int minplayAthkarMassa;
 
+    QString pathAyatoplay;
+    bool hasResourceErrorplayingQuran;
     //-----------------------------
 
     //Q_INVOKABLE void displayTimes(double lat, double lon, char  *cityName, int day, int month, int year, int gmtDiff, int dst, int method);
+
+    Q_INVOKABLE void playingQuranError(QMediaPlayer::Error errorplayingQuran);
+    Q_INVOKABLE void readxml(QString pathXmlTranslat);
+    Q_INVOKABLE int statePlayingQuran(QMediaPlayer::State isPlaying);
+
+    Q_INVOKABLE void addAoutho();
+    Q_INVOKABLE void addAouthoBassmalla();
+    Q_INVOKABLE void indexplaylistQuran(int positionindeAyaPlaying);
+    Q_INVOKABLE void stopplayingQuran();
+    Q_INVOKABLE void pauseplayingQuran();
+    Q_INVOKABLE void clearplaylist();
+    Q_INVOKABLE void addAyatoQuranplay(QString pathAyatoplay);
+    Q_INVOKABLE void playQuran();
 
     Q_INVOKABLE void InitailTimer();
     Q_INVOKABLE void PrayerTimes_Calculer();
@@ -208,6 +223,9 @@ protected:
     QString m_message;
 
 private:
+    QMediaPlaylist * playlist;
+    QMediaPlayer * playerQuran;
+
     QMediaPlayer * player;
     QTimer * timer;
     QTimer * timerInitial;
@@ -222,6 +240,8 @@ private:
 
     qint64 iPosition;
     qint64 iDuration;
+
+    int positionindeAyaPlaying;
 
 public slots:
     void playAdhan();
@@ -244,27 +264,33 @@ public slots:
     void justeplay();
 
 
-//----------
+    //----------
 signals:
-  void sendToQml(int count);
-  void sendToQmlAthanIsPlaying();
-  void sendToQmlAthanIsStoped();
-  void sendToQmlRemainTimeZero();
-  void sendToQmlRemainTimeNotZero();
+    void sendToQml(int count);
+    void sendToQmlAthanIsPlaying();
+    void sendToQmlAthanIsStoped();
 
-  void sendToQmltempAlert(int count, bool isactive);
-  void sendToQmltempAthan(int count, bool isactive);
-  void sendToQmltempActiveSilent(int count, bool isactive);
-  void sendToQmltempReturntoNormalMode(int count, bool isactive);
-  void sendToQmlplayhaftimersisActive(bool count);
-  void sendToQmltempRemainingTime(QString count);
+    void sendToQmlQuranIsPlaying();
+    void sendToQmlQuranIsStoped();
 
-  void positionChanged(qint64 iPosition );
-  void sendToQmlDurationMedia(int durat);
+    void sendToQmlRemainTimeZero();
+    void sendToQmlRemainTimeNotZero();
 
+    void sendToQmltempAlert(int count, bool isactive);
+    void sendToQmltempAthan(int count, bool isactive);
+    void sendToQmltempActiveSilent(int count, bool isactive);
+    void sendToQmltempReturntoNormalMode(int count, bool isactive);
+    void sendToQmlplayhaftimersisActive(bool count);
+    void sendToQmltempRemainingTime(QString count);
+
+    void positionChanged(qint64 iPosition );
+    void sendToQmlDurationMedia(int durat);
+
+    void sendToQmlindexplayAyaChanged(int count);
+    void sendToQmlErrorplayingQuran();
 
 public slots:
-  void receiveFromQml(int count);
+    void receiveFromQml(int count);
 
 private slots:
     void setPosition(qint64 position);

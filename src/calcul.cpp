@@ -1,6 +1,6 @@
 #include "calcul.h"
 #include <sailfishapp.h>
-
+#include <QDir>
 #include <QFile>
 /* pour srand */
 #include <stdio.h>
@@ -17,7 +17,7 @@
 #include <QLocale>
 
 #include <QtMultimedia>
-
+#include <QMediaPlaylist>
 #include <QProcess>
 
 #include <QtDBus>
@@ -33,7 +33,7 @@ calcul::calcul(QObject *parent) :
     QString locale = QString(QLocale::system().name()).left(2);
     if (locale.length() < 2) locale = "en";
 
-    qDebug() << "locale================"<< locale;
+    //qDebug() << "locale================"<< locale;
 
     settings.saveValueFor("locale", locale);
     //----------------------------------------
@@ -43,7 +43,15 @@ calcul::calcul(QObject *parent) :
     player->setMedia(SailfishApp::pathTo("sounds/Adhan/adhan_court.mp3"));
 
     QTimer::singleShot(1000, this, SLOT(Debut()));
+    //----------------------HAF 19-02-2022----------------------------
+    playlist = new QMediaPlaylist;
+    playerQuran = new QMediaPlayer;
+    playerQuran->setPlaylist(playlist);
+    playlist->setCurrentIndex(1);
 
+    connect(playlist, SIGNAL(currentIndexChanged(int)), this, SLOT(indexplaylistQuran(int)));
+    connect(playerQuran, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(statePlayingQuran(QMediaPlayer::State)));
+    connect(playerQuran, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(playingQuranError(QMediaPlayer::Error)));
     //----------------------HAF 1-4-2016 -----------------------------
     connect(player, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(statePlayingAdhan(QMediaPlayer::State)));
     //----------------HAF 1-6-2016-------
@@ -70,6 +78,97 @@ calcul::calcul(QObject *parent) :
 
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &calcul::setPosition);
     QObject::connect(player, &QMediaPlayer::durationChanged, this, &calcul::setDuration);
+}
+//------------------
+void calcul::playingQuranError(QMediaPlayer::Error errorplayingQuran)
+{
+    //qDebug() << "-------QMediaPlayer::ResourceError ----------"<<errorplayingQuran<<"-----" ;
+    if (errorplayingQuran==QMediaPlayer::ResourceError) {
+        hasResourceErrorplayingQuran=true;
+        emit sendToQmlErrorplayingQuran();
+    }else{
+        hasResourceErrorplayingQuran=false;
+    }
+    //qDebug() << "-------hasResourceErrorplayingQuran="<<hasResourceErrorplayingQuran<<"-----" ;
+}
+
+//----Read xml 1-3-2022--------------
+void calcul::readxml(QString pathXmlTranslat)
+{
+    QFile data(pathXmlTranslat);
+    data.open(QIODevice::Text | QIODevice::ReadOnly);
+    QString dataText = data.readAll();
+    //----- remove invalid xml comments that contain double dashes(--) from an xml file? HAF 29-02-2022
+    dataText.replace(QString("# --------------------------------------------------------------------"),
+                     QByteArray("# ====================================================================")); // replace text in string
+    //---------------------
+    data.close();
+
+    QString pathXmlTranslatModifed=pathXmlTranslat;
+    pathXmlTranslatModifed.remove(pathXmlTranslatModifed.length()-pathXmlTranslat.length());
+    QFile outFile(pathXmlTranslatModifed);
+    if( !outFile.open( QFile::WriteOnly | QFile::Truncate ) )
+    {
+        qDebug( "Failed to open file for writing." );
+        return ;
+    }
+    //qDebug() << "pathXmlTranslatModifed"<<pathXmlTranslatModifed ;
+    QTextStream stream( &outFile );
+    stream << dataText;
+    outFile.close();
+}
+//-----------------------------------
+int calcul::statePlayingQuran(QMediaPlayer::State isPlaying)
+{
+    if (isPlaying==QMediaPlayer::PlayingState) {
+        QuranIsPlaying=1;
+        emit sendToQmlQuranIsPlaying();
+    }else{
+        QuranIsPlaying=0;
+        hasResourceErrorplayingQuran=false;
+        emit sendToQmlQuranIsStoped();
+    }
+    return QuranIsPlaying;
+}
+void calcul::indexplaylistQuran(int positionindeAyaPlaying)
+{
+  if (!hasResourceErrorplayingQuran) {
+         emit sendToQmlindexplayAyaChanged(positionindeAyaPlaying);
+  }
+}
+void calcul::stopplayingQuran()
+{
+    playerQuran->stop();
+}
+void calcul::pauseplayingQuran()
+{
+    playerQuran->pause();
+}
+void calcul::clearplaylist()
+{
+    playlist->clear();
+}
+void calcul::addAoutho()
+{
+    playlist->addMedia(SailfishApp::pathTo("sounds/Quran/001000.mp3")); //Aoutho
+}
+void calcul::addAouthoBassmalla()
+{
+    playlist->addMedia(SailfishApp::pathTo("sounds/Quran/001000.mp3")); //Aoutho
+    playlist->addMedia(SailfishApp::pathTo("sounds/Quran/001001.mp3")); //Bassm Allah
+}
+void calcul::addAyatoQuranplay(QString pathAyatoplay)
+{
+    if (hasResourceErrorplayingQuran==false) playlist->addMedia(QUrl::fromLocalFile("/home/defaultuser"+pathAyatoplay));
+}
+void calcul::playQuran()
+{
+    //qDebug() << "-------QDir::currentPath() ----------"<<QDir::currentPath() <<"-----" ;
+    //playlist->setCurrentIndex(1);
+    //playlist->addMedia(QUrl::fromLocalFile("/home/defaultuser/Downloads/Thakir_Quran/Ghamadi_40kbps/002009.mp3"));
+    // playlist->addMedia(QUrl::fromLocalFile("/home/defaultuser/Downloads/Thakir_Quran/Ghamadi_40kbps/002009.mp3"));
+    // playlist->addMedia(QUrl::fromLocalFile("/home/defaultuser/Downloads/Thakir_Quran/Ghamadi_40kbps/002010.mp3"));
+    playerQuran->play();
 }
 void calcul::justeplay()
 {
@@ -105,15 +204,15 @@ int calcul::remaining_time_timesunrise_mn() {
     return (ptList[1].hour*60+ptList[1].minute)-cur_minutes;
 }
 void calcul::hafprofileSwitcherReset() {
-QTimer::singleShot(6000, [=] { //after 2mn
-    profileSwitcher();
-});
+    QTimer::singleShot(6000, [=] { //after 2mn
+        profileSwitcher();
+    });
 
 }
 void calcul::hafprofileSwitcherBackReset() {
-QTimer::singleShot(6000, [=] { //after 2mn
-    profileSwitcherback();
-});
+    QTimer::singleShot(6000, [=] { //after 2mn
+        profileSwitcherback();
+    });
 
 }
 
@@ -129,7 +228,7 @@ void calcul::haftimersplayall() {
     minAlerteBeforeAthanvalue=settings.getValueFor("minAlerteBeforeAthanvalue", "").toInt();
     emit sendToQmltempAlert(remaining_time_haf_Sec()-minAlerteBeforeAthanvalue*60,!athanhaseplayed);
     if (remaining_time_haf_Sec()-minAlerteBeforeAthanvalue*60==0){
-            allplayedReset();
+        allplayedReset();
         if (settings.getValueFor("alerteActiveChecked","")=="0" && alertehaseplayed==false){
             playAlert();
             alertehaseplayed=true;
@@ -139,7 +238,7 @@ void calcul::haftimersplayall() {
     //Athan
     emit sendToQmltempAthan(remaining_time_haf_Sec(),!athanhaseplayed);
     if(remaining_time_haf_Sec()==0){
-            allplayedReset();
+        allplayedReset();
         if (athanhaseplayed==false && settings.getValueFor("athanHasStoped","")=="false"){
             playAdhan();
             athanhaseplayed=true;
@@ -160,16 +259,16 @@ void calcul::haftimersplayall() {
         run_periodsActiveSilent = remaining_time_haf_Sec()-minSilentActiveBeforAthanJommoaavalue*60;
     }else{
         if (!(next_salat_haf_id()==3 && boolisJommoaa)){
-        run_periodsActiveSilent = minSilentActiveAfterAthanvalue*60 - passed_time_from_oldSalat_Sec();
+            run_periodsActiveSilent = minSilentActiveAfterAthanvalue*60 - passed_time_from_oldSalat_Sec();
         }else{
-          run_periodsActiveSilent=1;
+            run_periodsActiveSilent=1;
         }
     }
 
     emit sendToQmltempActiveSilent(run_periodsActiveSilent,!profileSwitcherhaseplayed);
 
     if (run_periodsActiveSilent==0){
-            allplayedReset();
+        allplayedReset();
         if (next_salat_haf_id()==5 && boolisRamathan){
             if(passed_time_from_oldSalat_Sec() != -1) {
                 if (silentDuringTarawihChecked==0 && profileSwitcherhaseplayed==false){
@@ -188,11 +287,11 @@ void calcul::haftimersplayall() {
             }
         }else{
             if(passed_time_from_oldSalat_Sec()!= -1) {
-                qDebug() << "-------profileSwitcher')----------"<<passed_time_from_oldSalat_Sec()<<"-----" ;
+                //qDebug() << "-------profileSwitcher')----------"<<passed_time_from_oldSalat_Sec()<<"-----" ;
                 if (silenctAfterAthanActiveChecked==0 && profileSwitcherhaseplayed==false && !(next_salat_haf_id()==-1 && boolisRamathan && silentDuringTarawihChecked==0)){
                     profileSwitcher();
                     profileSwitcherhaseplayed=true;
-                    qDebug() << "-------profileSwitcher')----------" ;
+                    //qDebug() << "-------profileSwitcher')----------" ;
                     //app.activate();
                 }
             }
@@ -207,9 +306,9 @@ void calcul::haftimersplayall() {
 
     if (next_salat_haf_id()==-1 && boolisRamathan){
         if(silentDuringTarawihChecked==0){
-        run_periodsBackModeSilent=minSilentDuringTarawihvalue*60-passed_time_from_oldSalat_Sec();
+            run_periodsBackModeSilent=minSilentDuringTarawihvalue*60-passed_time_from_oldSalat_Sec();
         }else{
-         run_periodsBackModeSilent= minSilentActiveAfterAthanvalue*60+minSilentActivedurationvalue*60-passed_time_from_oldSalat_Sec();
+            run_periodsBackModeSilent= minSilentActiveAfterAthanvalue*60+minSilentActivedurationvalue*60-passed_time_from_oldSalat_Sec();
         }
     }else if(next_salat_haf_id()==3 && boolisJommoaa){
         run_periodsBackModeSilent=passed_time_from_oldSalat_Sec() - minSilentActiveAfterAthanJommoaavalue*60;
@@ -221,35 +320,35 @@ void calcul::haftimersplayall() {
     emit sendToQmltempReturntoNormalMode(run_periodsBackModeSilent,!profileSwitcherbackhaseplayed);
 
     if (run_periodsBackModeSilent==0){
-                allplayedReset();
-            if (next_salat_haf_id()==-1 && boolisRamathan){
-                qDebug() << "passed_time_from_oldSalat_Sec()=" << passed_time_from_oldSalat_Sec();
-                if(passed_time_from_oldSalat_Sec() != -1) {
-                    if ((silentDuringTarawihChecked==0 || silenctAfterAthanActiveChecked==0) && profileSwitcherbackhaseplayed==false){
-                        profileSwitcherback();
-                        qDebug() << "rentrer dans profileSwitcherback() Ramathan ";
-                        profileSwitcherbackhaseplayed=true;
-                        //app.activate();
-                    }
-                }
-            }else if(next_salat_haf_id()==3 && boolisJommoaa){
-                if(passed_time_from_oldSalat_Sec() != -1) {
-                    if (silentDuringSalatJommoaaChecked==0 && profileSwitcherbackhaseplayed==false){
-                        profileSwitcherback();
-                        profileSwitcherbackhaseplayed=true;
-                        //app.activate();
-                    }
-                }
-            }else{
-                if(passed_time_from_oldSalat_Sec() != -1) {
-                    if (silenctAfterAthanActiveChecked==0 && profileSwitcherbackhaseplayed==false){
-                        profileSwitcherback();
-                        profileSwitcherbackhaseplayed=true;
-                        //app.activate();
-                    }
+        allplayedReset();
+        if (next_salat_haf_id()==-1 && boolisRamathan){
+            //qDebug() << "passed_time_from_oldSalat_Sec()=" << passed_time_from_oldSalat_Sec();
+            if(passed_time_from_oldSalat_Sec() != -1) {
+                if ((silentDuringTarawihChecked==0 || silenctAfterAthanActiveChecked==0) && profileSwitcherbackhaseplayed==false){
+                    profileSwitcherback();
+                    //qDebug() << "rentrer dans profileSwitcherback() Ramathan ";
+                    profileSwitcherbackhaseplayed=true;
+                    //app.activate();
                 }
             }
-      }
+        }else if(next_salat_haf_id()==3 && boolisJommoaa){
+            if(passed_time_from_oldSalat_Sec() != -1) {
+                if (silentDuringSalatJommoaaChecked==0 && profileSwitcherbackhaseplayed==false){
+                    profileSwitcherback();
+                    profileSwitcherbackhaseplayed=true;
+                    //app.activate();
+                }
+            }
+        }else{
+            if(passed_time_from_oldSalat_Sec() != -1) {
+                if (silenctAfterAthanActiveChecked==0 && profileSwitcherbackhaseplayed==false){
+                    profileSwitcherback();
+                    profileSwitcherbackhaseplayed=true;
+                    //app.activate();
+                }
+            }
+        }
+    }
 
     //Play Athkar Sabbah
     if (next_salat_haf_id()==2){ //a rectifier pour chorok au lieu fajr
@@ -257,7 +356,7 @@ void calcul::haftimersplayall() {
         minplayAthkarSabah=settings.getValueFor("minplayAthkarSabah","").toInt();
 
         run_periodsPlayAthkarSabah= minplayAthkarSabah-remaining_time_timesunrise_mn();
-        qDebug() << "remaining_time_timesunrise_mn()=" << remaining_time_timesunrise_mn();
+        //qDebug() << "remaining_time_timesunrise_mn()=" << remaining_time_timesunrise_mn();
         if (run_periodsPlayAthkarSabah==0){
             allplayedReset();
             if(passed_time_from_oldSalat_Sec() != -1) {
@@ -291,32 +390,32 @@ void calcul::haftimersplayall() {
 
 void calcul::playathkarSabah(){
     int random_integer = rand() % 8;
-    qDebug() << "HAF random_integer_playathkarSabah="<<random_integer << endl;
+    //qDebug() << "HAF random_integer_playathkarSabah="<<random_integer << endl;
     switch (random_integer) {
-        case 0:
-            player->setMedia(SailfishApp::pathTo("sounds/Athkar/1_1.mp3"));
-            break;
-        case 1:
-            player->setMedia(SailfishApp::pathTo("sounds/Athkar/1_2.mp3"));
-            break;
-        case 2:
-            player->setMedia(SailfishApp::pathTo("sounds/Athkar/1_3.mp3"));
-            break;
-        case 3:
-            player->setMedia(SailfishApp::pathTo("sounds/Athkar/1_4.mp3"));
-            break;
-        case 4:
-            player->setMedia(SailfishApp::pathTo("sounds/Athkar/2_4.mp3"));
-            break;
-        case 5:
-            player->setMedia(SailfishApp::pathTo("sounds/Athkar/2_1.mp3"));
-            break;
-        case 6:
-            player->setMedia(SailfishApp::pathTo("sounds/Athkar/1_19.mp3"));
-            break;
-        case 7:
-            player->setMedia(SailfishApp::pathTo("sounds/Athkar/3_1.mp3"));
-            break;
+    case 0:
+        player->setMedia(SailfishApp::pathTo("sounds/Athkar/1_1.mp3"));
+        break;
+    case 1:
+        player->setMedia(SailfishApp::pathTo("sounds/Athkar/1_2.mp3"));
+        break;
+    case 2:
+        player->setMedia(SailfishApp::pathTo("sounds/Athkar/1_3.mp3"));
+        break;
+    case 3:
+        player->setMedia(SailfishApp::pathTo("sounds/Athkar/1_4.mp3"));
+        break;
+    case 4:
+        player->setMedia(SailfishApp::pathTo("sounds/Athkar/2_4.mp3"));
+        break;
+    case 5:
+        player->setMedia(SailfishApp::pathTo("sounds/Athkar/2_1.mp3"));
+        break;
+    case 6:
+        player->setMedia(SailfishApp::pathTo("sounds/Athkar/1_19.mp3"));
+        break;
+    case 7:
+        player->setMedia(SailfishApp::pathTo("sounds/Athkar/3_1.mp3"));
+        break;
     }
     player->setVolume(100);
     player->play();
@@ -325,7 +424,7 @@ void calcul::playathkarSabah(){
 
 void calcul::playathkarMassaa(){
     int random_integer = rand() % 5;
-    qDebug() << "HAF random_integer_playathkarMassaa="<<random_integer << endl;
+    //qDebug() << "HAF random_integer_playathkarMassaa="<<random_integer << endl;
     switch (random_integer) {
     case 0:
         player->setMedia(SailfishApp::pathTo("sounds/Athkar/2_1.mp3"));
@@ -408,7 +507,7 @@ calcul::~calcul()
         msg << itsInitialProfile;
         QDBusMessage reply = QDBusConnection::sessionBus().call(msg);
         if (reply.type() != QDBusMessage::ErrorMessage) {
-            qDebug() << "Switched phone profile back to" << itsInitialProfile;
+            //qDebug() << "Switched phone profile back to" << itsInitialProfile;
         }
         else {
             qWarning() << "Switching current phone profile failed:" << QDBusConnection::sessionBus().lastError();
@@ -438,7 +537,7 @@ QString calcul::Hikkmato_Youm()
     {
         Hikkmato_Youm();
     }
-    qDebug() << "HAF random_integer_hikma="<<random_integer_hikma << endl;
+    //qDebug() << "HAF random_integer_hikma="<<random_integer_hikma << endl;
 
     file.close();
     return line;
@@ -465,7 +564,7 @@ QString calcul::formatNumberArab(QString value) {
     return Number_Format_Arab;
 
 
-profileSwitcherbackhaseplayed=false;
+    profileSwitcherbackhaseplayed=false;
 }
 QString calcul::formatNumberHindi(float value) {
     QString formatNumberHindichecked=settings.getValueFor("formatNumberHindiActiveChecked", "");
@@ -497,7 +596,7 @@ void calcul::profileSwitcherback()
         msg << itsInitialProfile;
         QDBusMessage reply = QDBusConnection::sessionBus().call(msg);
         if (reply.type() != QDBusMessage::ErrorMessage) {
-            qDebug() << "Switched phone profile back to" << itsInitialProfile;
+            //qDebug() << "Switched phone profile back to" << itsInitialProfile;
 
             player->setMedia(SailfishApp::pathTo("sounds/Alert/Beep.mp3"));
             player->play();
@@ -505,7 +604,7 @@ void calcul::profileSwitcherback()
         else {
             hafprofileSwitcherBackReset();
 
-            qDebug() << "Switching current phone profile failed:" << QDBusConnection::sessionBus().lastError();
+            //qDebug() << "Switching current phone profile failed:" << QDBusConnection::sessionBus().lastError();
         }
     }
 }
@@ -541,14 +640,14 @@ void calcul::profileSwitcher()
                 msg << PHONE_PROFILE_SILENT;
                 QDBusMessage reply = QDBusConnection::sessionBus().call(msg);
                 if (reply.type() != QDBusMessage::ErrorMessage) {
-                    qDebug() << "Switched phone profile from" << itsInitialProfile
-                             << "to" << PHONE_PROFILE_SILENT;
+                    //qDebug() << "Switched phone profile from" << itsInitialProfile
+                             //<< "to" << PHONE_PROFILE_SILENT;
                     player->setMedia(SailfishApp::pathTo("sounds/Alert/Beep.mp3"));
                     player->play();
                 }
                 else {
                     hafprofileSwitcherReset() ;
-                    qDebug() << "Switching current phone profile failed:" << QDBusConnection::sessionBus().lastError();
+                    //qDebug() << "Switching current phone profile failed:" << QDBusConnection::sessionBus().lastError();
 
                     // we did not switch profile, therefore we also do not need to switch it back
                     // this is achieved by faking the initial profile to silent
@@ -558,10 +657,10 @@ void calcul::profileSwitcher()
         }
         else{
             hafprofileSwitcherReset();
-            qDebug() << "Determining current phone profile failed:" << QDBusConnection::sessionBus().lastError();
-    }
+            //qDebug() << "Determining current phone profile failed:" << QDBusConnection::sessionBus().lastError();
         }
-    qDebug() << "itsInitialProfile===" << itsInitialProfile;
+    }
+    //qDebug() << "itsInitialProfile===" << itsInitialProfile;
 }
 //----------------------------------------------------------------------
 int calcul::statePlayingAdhan(QMediaPlayer::State isPlaying)
@@ -581,7 +680,7 @@ bool calcul::locationEnabled()
     return location.value("location/enabled", false).toBool();
 }
 void calcul::Debut() {
-    qDebug() <<"------remaining_time_haf_Sec---";
+    //qDebug() <<"------remaining_time_haf_Sec---";
     emit sendToQml(remaining_time_haf_Sec());
 }
 
@@ -591,13 +690,13 @@ void calcul::InitailTimer() {
         timerInitial->stop();
         timer->start();
         PrayerTimes_Calculer();
-        qDebug() << "Timer start";
+        //qDebug() << "Timer start";
     }else{
-        qDebug() << nowtemp.time().second();
+        //qDebug() << nowtemp.time().second();
     }
 }
 void calcul::receiveFromQml(int count) {
-    qDebug() << "Received in C++ from QML:" << count;
+    //qDebug() << "Received in C++ from QML:" << count;
 }
 //-----------
 QString calcul::displayTimes_hhmm(int i)
@@ -869,7 +968,7 @@ bool calcul::isPrayerExtrem(int indexprayer)
 //    QString delay_str = QString::number(delay);
 //    QString cmd = "timedclient-qt5 --set-snooze=" + delay_str;
 //    process->start(cmd);
-//    qDebug() << "set_adjustment ok c++: " << cmd;
+//    //qDebug() << "set_adjustment ok c++: " << cmd;
 //}
 //double calcul::get_adjustment() {
 //    QProcess *process = new QProcess(this);
@@ -891,7 +990,7 @@ void calcul::PrayerTimes_Calculer()
 
     now = QDateTime::currentDateTime();
     double now_hour=now.time().hour() + now.time().minute()/60.;
-    //    qDebug() << now_hour ;
+    //    //qDebug() << now_hour ;
     //    if ( conv_time_haf(now_hour,NEAREST)==conv_time_haf(fajr,NEAREST) || conv_time_haf(now_hour,NEAREST)==conv_time_haf(dhuhr,NEAREST) || conv_time_haf(now_hour,NEAREST)==conv_time_haf(asr,NEAREST) || conv_time_haf(now_hour,NEAREST)==conv_time_haf(maghrib,NEAREST) || conv_time_haf(now_hour,NEAREST)==conv_time_haf(isha,NEAREST))
     //    {
     //       emit sendToQml(43); // for active Silent profile (via dbus)
@@ -922,7 +1021,7 @@ void calcul::PrayerTimes_Calculer()
     }
 
 
-    qDebug() << "next_prayer_id======" << next_prayer_id;
+    //qDebug() << "next_prayer_id======" << next_prayer_id;
 }
 QString calcul::displayTimes_time_end_Isha_hhmm(){
 
@@ -1586,7 +1685,7 @@ void calcul::playAdhan()
         //---7-4-2016----
         volumeAthan = settings.getValueFor("volumeAthanSlidervalue","").toInt();
         sendToQml(volumeAthan);
-        qDebug() <<"volumeAthan=" <<volumeAthan;
+        //qDebug() <<"volumeAthan=" <<volumeAthan;
         player->setVolume(volumeAthan);
         //---------------
 
@@ -1695,17 +1794,17 @@ int calcul::hikmatooum()
     now = QDateTime::currentDateTime();
     //    QLocale::Country country = QLocale::system().country();
     //    QString locale = QLocale::system().name();
-    //   qDebug() << QLocale::languageToString(country) ;
-    //   qDebug() << QLocale::system().name();
-    //  qDebug() << QLocale::countryToString(country);
-    //   qDebug() << QLocale::system().nativeLanguageName();
-    //  qDebug() <<QLocale::languageToString(QLocale::system().language());
+    //   //qDebug() << QLocale::languageToString(country) ;
+    //   //qDebug() << QLocale::system().name();
+    //  //qDebug() << QLocale::countryToString(country);
+    //   //qDebug() << QLocale::system().nativeLanguageName();
+    //  //qDebug() <<QLocale::languageToString(QLocale::system().language());
     //    QTimeZone timezone1=QTimeZone("America/Chicago");
     //    QTimeZone timezone2=QTimeZone("America/Chicago");
-    // qDebug() << now.isDaylightTime();
-    //  qDebug() << timezone2.isDaylightTime(now);
+    // //qDebug() << now.isDaylightTime();
+    //  //qDebug() << timezone2.isDaylightTime(now);
     //double timezone = now.offsetFromUtc()/3600.;
-    // qDebug() << timezone;
+    // //qDebug() << timezone;
     //    if (now.isDaylightTime()){
     //     return QLocale::countryToString(country)+":"+QLocale::languageToString(QLocale::system().language())+"::"+"true";
     //    }else{
@@ -1907,7 +2006,14 @@ void calcul::hijridate(int index_spinBox_correction_hijri)
     QString strmydate_day= QString("%1")
             .arg(mydate.day);
 
-    if (mydate.month==9)
+    //--------------HAF 15-4-2021---------------
+    sDate mydateaddoneday;
+    int dayaddoneday;
+    int error_codeaddoneday = 0;
+    dayaddoneday   = t_ptr->tm_mday + index_spinBox_correction_hijri+1;
+    error_codeaddoneday = h_date(&mydateaddoneday, dayaddoneday, month, year);
+    //------------------------------------------
+    if (mydate.month==9 || (mydate.month==8 && mydateaddoneday.day==1)) // HAF 15-4-2021
     {
         boolisRamathan=true;
     }else{
@@ -2002,7 +2108,7 @@ void calcul::hijridate(int index_spinBox_correction_hijri)
 
     //---------10-6-2016------------
 
-    if (strDaysEvent=="" && settings.getValueFor("language", "")=="ar") strDaysEvent=Hikkmato_Youm();
+    if (strDaysEvent.length()==0 && settings.getValueFor("language", "")=="ar") strDaysEvent=Hikkmato_Youm();
     //------------------------------
 }
 

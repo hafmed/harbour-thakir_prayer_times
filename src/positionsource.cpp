@@ -59,7 +59,7 @@ PositionSource::PositionSource(QObject *parent) :
     if (createReply.isValid()==false)
         qWarning() << createReply.error();
     else
-        qDebug() << createReply.value().path();
+        //qDebug() << createReply.value().path();
 
     gcInterface = new QDBusInterface( "org.freedesktop.Geoclue.Master", createReply.value().path(), "", QDBusConnection::sessionBus(), this);
     if (gcInterface->isValid()==false)
@@ -71,20 +71,20 @@ bool PositionSource::start() {
     bool ok;
 
     msg=gcInterface->call("PositionStart");
-    qDebug() << "PS: " << msg;
+    //qDebug() << "PS: " << msg;
 
     gpsInterface = new QDBusInterface("org.freedesktop.Geoclue.Providers.Hybris", "/org/freedesktop/Geoclue/Providers/Hybris", "", QDBusConnection::sessionBus());
     if (gpsInterface->isValid()==false)
         qWarning() << gcInterface->lastError();
 
     msg = gpsInterface->call("AddReference");
-    qDebug() << msg;
+    //qDebug() << msg;
 
     msg=gpsInterface->call("GetProviderInfo");
-    qDebug() << msg;
+    //qDebug() << msg;
 
     msg=gpsInterface->call("GetStatus");
-    qDebug() << msg;
+    //qDebug() << msg;
 
     ok=QDBusConnection::sessionBus().connect("org.freedesktop.Geoclue.Position", "/org/freedesktop/Geoclue/Position", "", "PositionChanged", this, SLOT(positionChanged(QDBusMessage)));
     if (ok==false)
@@ -109,7 +109,7 @@ PositionSource::~PositionSource() {
     QDBusMessage msg;
 
     msg = gpsInterface->call("RemoveReference");
-    qDebug() << msg;
+    //qDebug() << msg;
 }
 
 void PositionSource::gcSatelliteChanged(QDBusMessage msg) {
@@ -119,7 +119,7 @@ void PositionSource::gcSatelliteChanged(QDBusMessage msg) {
     satellitesUsed = arguments.at(1).toInt();
     satellitesView = arguments.at(2).toInt();
 
-    qDebug() << "*** Satellites: " << timestamp << "@ " << satellitesUsed << "/" << satellitesView;
+    //qDebug() << "*** Satellites: " << timestamp << "@ " << satellitesUsed << "/" << satellitesView;
 
     emit satellitesInViewChanged();
     emit satellitesInUseChanged();
@@ -135,9 +135,9 @@ void PositionSource::gcVelocityChanged(QDBusMessage msg) {
     direction=(vflags & GEOCLUE_VELOCITY_FIELDS_DIRECTION) ? a.at(3).toDouble() : 0.0;
     climb=(vflags & GEOCLUE_VELOCITY_FIELDS_CLIMB) ? a.at(4).toDouble() : 0.0;
 
-    qDebug() << "Vel: " << velocity;
-    qDebug() << "Dir: " << direction;
-    qDebug() << "Cli: " << climb;
+    //qDebug() << "Vel: " << velocity;
+    //qDebug() << "Dir: " << direction;
+    //qDebug() << "Cli: " << climb;
 
     emit velocityChanged(velocity);
     emit directionChanged(direction);
@@ -183,19 +183,19 @@ void PositionSource::gcPositionChanged(QDBusMessage msg)
         emit altitudeChanged(altitude);
     }
 
-    qDebug() << "Position: " << valid << " @ " << gpsTime << " : " << "LatLon: " << lat << " / " << lon << " Alt: " << isValidAlt << " : " << altitude;
+    //qDebug() << "Position: " << valid << " @ " << gpsTime << " : " << "LatLon: " << lat << " / " << lon << " Alt: " << isValidAlt << " : " << altitude;
 
     const QDBusArgument &aargs = a.at(5).value<QDBusArgument>();
     if (aargs.currentType()==QDBusArgument::StructureType) {
         aargs.beginStructure();
         qDebug("AF");
         aargs >> af;
-        qDebug() << af;
+        //qDebug() << af;
         aargs >> ah;
-        qDebug() << ah;
+        //qDebug() << ah;
         aargs >> av;
-        qDebug() << av;
+        //qDebug() << av;
         aargs.endStructure();
     }
-    qDebug() << "Accuracy: " << af << " " << ah << " / " << av;
+    //qDebug() << "Accuracy: " << af << " " << ah << " / " << av;
 }

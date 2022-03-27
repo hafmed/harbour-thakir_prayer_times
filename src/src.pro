@@ -3,11 +3,11 @@ TEMPLATE = app
 TARGET = harbour-thakir_prayer_times
 
 # App version
-DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
+#DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
 
 CONFIG += sailfishapp
 #PKGCONFIG += keepalive
-QT += multimedia dbus
+QT += multimedia dbus xml
 #QT += dbus
 #declarative
 
@@ -20,10 +20,12 @@ SOURCES += $${TARGET}.cpp \
     positionsource.cpp \
     track.cpp \
     hijri.c  \
-    uiconnection.cpp
+    uiconnection.cpp \
+    DownloadManager.cpp
 
 
 HEADERS += display.h \
+    DownloadManager.hpp \
     astro.h \
     calcul.h \
     prayer.h \

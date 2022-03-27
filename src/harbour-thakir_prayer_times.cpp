@@ -25,7 +25,7 @@
 #include <QtQml>  // pour  qmlRegisterType<calcul>(.....
 
 #include "positionsource.h"
-
+#include "DownloadManager.hpp"
 
 
 int main(int argc, char *argv[])
@@ -43,12 +43,12 @@ int main(int argc, char *argv[])
 
     //QGuiApplication* app = SailfishApp::application(argc, argv);
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
-    app->setApplicationVersion(QString(APP_VERSION));
+    //app->setApplicationVersion(QStringLiteral(APP_VERSION));
 
     Display *display = new Display();
 
     QQuickView* view = SailfishApp::createView();
-    qDebug() << "Import path" << SailfishApp::pathTo("lib/").toLocalFile();
+    //qDebug() << "Import path" << SailfishApp::pathTo("lib/").toLocalFile();
     view->engine()->addImportPath(SailfishApp::pathTo("lib/").toLocalFile());
     // view->engine()->addImportPath(SailfishApp::pathTo("qml/components/").toLocalFile());
     view->engine()->addImportPath(SailfishApp::pathTo("qml/pages/").toLocalFile());
@@ -57,10 +57,10 @@ int main(int argc, char *argv[])
 
     QString locale = QLocale::system().name();
 
-//    qDebug() << "Translations:" << SailfishApp::pathTo("translations").toLocalFile() + "/" + locale + ".qm";
+//    //qDebug() << "Translations:" << SailfishApp::pathTo("translations").toLocalFile() + "/" + locale + ".qm";
 
 //    if(!translator->load(SailfishApp::pathTo("translations").toLocalFile() + "/" + locale + ".qm")) {
-//        qDebug() << "Couldn't load translation";
+//        //qDebug() << "Couldn't load translation";
 //    }
 //    app->installTranslator(translator);
 
@@ -86,6 +86,14 @@ int main(int argc, char *argv[])
     qmlRegisterType<PositionSource>("harbour.thakir_prayer_times.hafgps", 1, 0, "PositionSource");
 
     //qmlRegisterType<UIConnection>("harbour.thakir_prayer_times.uiconnection", 1, 0, "UIConnection");
+
+    //---- HAF 19-02-2022---------
+   // DownloadManager *manager= new DownloadManager();
+     //qmlRegisterType<_manager>("harbour.thakir_prayer_times.manager", 1, 0, "manager");
+   //DownloadManager *_manager= new DownloadManager();
+  // qml->setContextProperty("harbour.thakir_prayer_times.manager", manager);
+     qmlRegisterType<DownloadManager>("harbour.thakir_prayer_times.downloadManager", 1, 0, "DownloadManager");
+    //----------------------------
 
 
     view->setSource(SailfishApp::pathTo("qml/harbour-thakir_prayer_times.qml"));
