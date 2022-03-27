@@ -8,11 +8,37 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Fri Jun 26 2020 HAFIANE MOHAMED <thakir.dz@gmail.com> 3.0.9-1
+* Sat Fri 25 2022 HAFIANE MOHAMED <thakir.dz@gmail.com> 4.0.19-1
+- Some bugs fixed
+- Add Sensors permission for compass
+- Compatibility to Sailfish X 4.4.0.58 EA
+
+* Thu Mar 17 2022 HAFIANE MOHAMED <thakir.dz@gmail.com> 4.0.9-1
+- Add Quran
+- Sailjail support
+- Compatibility to Sailfish X 4.3.0.15
+
+* Thu Dec 9 2021 HAFIANE MOHAMED <thakir.dz@gmail.com> 3.1.9-1
+- Some bugs fixed
+
+* Sun Dec 5 2021 HAFIANE MOHAMED <thakir.dz@gmail.com> 3.1.7-1
+- Compatibility to Sailfish X 4.3.0.12
+
+* Mon Nov 15 2021 HAFIANE MOHAMED <thakir.dz@gmail.com> 3.1.5-1
+- Add "Application permissions"
+
+* Tue Apr 13 2021 HAFIANE MOHAMED <thakir.dz@gmail.com> 3.1.0-1
+- Add support for My Backup
+- Release aarch64 build
+
+* Tue Apr 13 2021 HAFIANE MOHAMED <thakir.dz@gmail.com> 3.0.10-1
+- Compatibility to Sailfish X 4.0.1.48
+
+* Fri Jun 5 2020 HAFIANE MOHAMED <thakir.dz@gmail.com> 3.0.9-1
 - Compatibility to Sailfish X 3.3.0.16
 
 * Tue Sep 17 2019 HAFIANE MOHAMED <thakir.dz@gmail.com> 3.0.7-1
-- update to Nemo.KeepAlive 1.2
+- Update to Nemo.KeepAlive 1.2
 
 * Thu May 23 2019 HAFIANE MOHAMED <thakir.dz@gmail.com> 3.0.5-1
 - Some bugs fixed
