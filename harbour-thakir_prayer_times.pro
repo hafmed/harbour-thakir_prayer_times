@@ -8,8 +8,7 @@
 #         - icon definition filename in desktop file must be changed
 TARGET = harbour-thakir_prayer_times
 
-QT += multimedia \
-    dbus
+QT += multimedia dbus xml
 
 PKGCONFIG += keepalive
 
@@ -48,10 +47,14 @@ SOURCES = \
     ../qml/pages/Quibla.qml \
     ../qml/pages/Favorites.qml \
     ../qml/cover/CoverPage.qml \
-    ../qml/pages/components/ProgressBar.qml
+    ../qml/pages/components/ProgressBar.qml \
+    ../qml/pages/Souwar.qml \
+    ../qml/pages/Ayat.qml \
+    ../qml/pages/DownloadSura.qml \
+    ../qml/pages/Settings-Quran.qml
 }
 
-CONFIG += sailfishapp_i18n
+CONFIG += sailfishapp_i18n C++99
 TRANSLATIONS = translations/en_GB.ts \
     translations/fr.ts \
     translations/tr.ts \
@@ -63,6 +66,10 @@ translations.path = $${DEPLOYMENT_PATH}
 OTHER_FILES += qml/pages/*.qml \
     qml/cover/*.qml \
     qml/pages/*.js \
+    qml/pages/*.xml \
+    qml/pages/xml/*.xml \
+    qml/pages/fonts/*.ttf \
+    qml/pages/fonts/*.otf \
     rpm/harbour-thakir_prayer_times.spec \
     rpm/harbour-thakir_prayer_times.yaml \
     rpm/harbour-thakir_prayer_times.changes
@@ -70,7 +77,7 @@ OTHER_FILES += qml/pages/*.qml \
 INSTALLS += desktop appicons qml sounds translations files
 
 TEMPLATE = subdirs
-SUBDIRS = src/folderlistmodel src
+SUBDIRS = src
 
 DISTFILES += \
     qml/pages/SettingsLocation.qml \
