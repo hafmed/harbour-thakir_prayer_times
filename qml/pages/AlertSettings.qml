@@ -1,21 +1,34 @@
 
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
-
+import Sailfish.Pickers 1.0 // File-Loader
 
 Page {
     id: page
-
+    Component {
+        id: athanPickerPage
+        FilePickerPage {
+            title: qsTr("Select Athan file!")
+            nameFilters: [ '*.mp3', '*.ogg' ]
+            onSelectedContentPropertiesChanged: {
+                selectedFajrAdhanFileUser = selectedContentProperties.filePath
+                selectedFajrAdhanFileUserName = selectedContentProperties.fileName
+                settings.saveValueFor("selectedFajrAdhanFileUser",selectedFajrAdhanFileUser)
+                settings.saveValueFor("selectedFajrAdhanFileUserName",selectedFajrAdhanFileUserName)
+                if (selectedSoundLabel.label.length !== 0) comboBox_Adhan_Fajr.currentIndex=4
+            }
+        }
+    }
     SilicaFlickable {
         anchors.fill: parent
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
-//        PullDownMenu {
-//            MenuItem {
-//                text: qsTr("Configure alert and Adhan")
-//                onClicked: pageStack.push(Qt.resolvedUrl("Alert_Adhan.qml"))
-//            }
-//        }
+        //        PullDownMenu {
+        //            MenuItem {
+        //                text: qsTr("Configure alert and Adhan")
+        //                onClicked: pageStack.push(Qt.resolvedUrl("Alert_Adhan.qml"))
+        //            }
+        //        }
 
         // Tell SilicaFlickable the height of its content.
         contentHeight: column.height
@@ -62,7 +75,7 @@ Page {
                 value: minAlerteBeforeAthanvalue
                 onValueChanged: {
                     minAlerteBeforeAthanvalue=minAlerteBeforeAthan.value.toFixed(0)
-                    console.log("minAlerteBeforeAthanvalue="+minAlerteBeforeAthanvalue)
+                    //console.log("minAlerteBeforeAthanvalue="+minAlerteBeforeAthanvalue)
                     settings.saveValueFor("minAlerteBeforeAthanvalue",minAlerteBeforeAthanvalue)
                 }
                 visible: alerteActiveChecked=="0"
@@ -75,7 +88,7 @@ Page {
                 currentIndex: adhan_Fajr
                 onCurrentIndexChanged: {
                     adhan_Fajr=currentIndex
-                    console.log("adhan_Fajr="+adhan_Fajr)
+                    //console.log("adhan_Fajr="+adhan_Fajr)
                     settings.saveValueFor("adhan_Fajr",adhan_Fajr)
                 }
                 menu: ContextMenu {
@@ -104,7 +117,7 @@ Page {
                             id: selectedSoundLabel;
                             color: comboBox_Adhan_Fajr.currentIndex===4 ? Theme.secondaryColor : Theme.highlightColor;
                             textFormat: Text.StyledText;
-                            text: baseName(selectedFajrAdhanFileUser);
+                            text: selectedFajrAdhanFileUserName;
                         }
                     }
                     Label {
@@ -116,12 +129,7 @@ Page {
                 }
 
                 onClicked: {
-                    //console.log('Select file', checked)
-                    var filePicker = pageStack.push(Qt.resolvedUrl('AdhanSelectDialog.qml'));
-                    filePicker.accepted.connect(function() {
-                        selectedFajrAdhanFileUser = filePicker.selectedSound;
-                        settings.saveValueFor("selectedFajrAdhanFileUser",selectedFajrAdhanFileUser)
-                    });
+                    pageStack.push(athanPickerPage)
                 }
             }
             //----------27-11-2018----------
@@ -156,7 +164,7 @@ Page {
                 value: minplayAthkarSabah
                 onValueChanged: {
                     minplayAthkarSabah=minplayAthkarSabahSlider.value.toFixed(0)
-                    console.log("minplayAthkarSabah="+minplayAthkarSabah)
+                    //console.log("minplayAthkarSabah="+minplayAthkarSabah)
                     settings.saveValueFor("minplayAthkarSabah",minplayAthkarSabah)
                 }
                 visible: playAthkarSabahChecked==="0"
@@ -193,13 +201,13 @@ Page {
                 value: minplayAthkarMassa
                 onValueChanged: {
                     minplayAthkarMassa=minplayAthkarMassaSlider.value.toFixed(0)
-                    console.log("minplayAthkarMassa="+minplayAthkarMassa)
+                    //console.log("minplayAthkarMassa="+minplayAthkarMassa)
                     settings.saveValueFor("minplayAthkarMassa",minplayAthkarMassa)
                 }
                 visible: playAthkarMassaChecked==="0"
             }
 
-//------ 11-11-2018------------
+            //------ 11-11-2018------------
             TextSwitch {
                 id: stopathanonrotation
                 text:  qsTr("Stop Adhan/Athkar by turning the device face down")
@@ -213,18 +221,21 @@ Page {
                     settings.saveValueFor("stopathanonrotationChecked",stopathanonrotationChecked)
                 }
             }
-//------------
+            //------------
 
         }
     }
-    function baseName(str) {
-       var base = new String(str).substring(str.lastIndexOf('/') + 1);
-        if(base.lastIndexOf(".") != -1)
-            base = base.substring(0, base.lastIndexOf("."));
-       return base;
-    }
-    onStateChanged: {
-
+    //    function baseName(str) {
+    //       var base = new String(str).substring(str.lastIndexOf('/') + 1);
+    //        if(base.lastIndexOf(".") != -1)
+    //            base = base.substring(0, base.lastIndexOf("."));
+    //       return base;
+    //    }
+    onStatusChanged: {
+        if (status !== PageStatus.Inactive) {
+            if (comboBox_Adhan_Fajr.currentIndex===4 && selectedFajrAdhanFileUserName.length === 0)
+                comboBox_Adhan_Fajr.currentIndex=1
+        }
     }
 
     Component.onCompleted: {

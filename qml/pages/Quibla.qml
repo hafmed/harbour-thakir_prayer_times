@@ -1,5 +1,5 @@
 
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.thakir_prayer_times.calculcpp 1.0
 import harbour.thakir_prayer_times.settings 1.0
@@ -202,7 +202,7 @@ Page {
             }
         }
     }
-    onStateChanged: {
+    onStatusChanged: {
 //        if (status !== PageStatus.Active) {
 //            calculQuibla();
 //        }

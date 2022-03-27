@@ -1,5 +1,5 @@
 
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.thakir_prayer_times.calculcpp 1.0
 import harbour.thakir_prayer_times.settings 1.0
@@ -261,9 +261,9 @@ Page {
                                 num = view.model.get(a-1).name.substring(9,10)
                             }
                             if (num  > nbreFavoritesSavedMax) nbreFavoritesSavedMax=num
-                            console.log("num="+num)
+                            //console.log("num="+num)
                         }
-                        console.log("nbreFavoritesSavedMax="+nbreFavoritesSavedMax)
+                        //console.log("nbreFavoritesSavedMax="+nbreFavoritesSavedMax)
                         nbreFavoritesSaved=Math.round(settings.getValueFor("Favorites/nbreFavoritesSaved",nbreFavoritesSaved))
                         nbreFavoritesSaved=nbreFavoritesSaved+1;
 
@@ -285,7 +285,7 @@ Page {
                 width: ListView.view.width
                 contentHeight: listLabel.height+30
 
-                onClicked: console.log("Clicked " + view.model.get(index).name)
+                //onClicked: console.log("Clicked " + view.model.get(index).name)
                 onPressed: selectedname=view.model.get(index).name
 
                 Label {
@@ -350,7 +350,7 @@ Page {
                 var a;
                 modelFav.clear();
                 nbreFavoritesSaved=Math.round(settings.getValueFor("Favorites/nbreFavoritesSaved",nbreFavoritesSaved))
-                console.log("nbreFavoritesSaved= " + nbreFavoritesSaved)
+                //console.log("nbreFavoritesSaved= " + nbreFavoritesSaved)
                 for (a = 1; a <= nbreFavoritesSaved; a++) {
                      var tempNew;
                     if (a!=1){
@@ -369,10 +369,10 @@ Page {
                         }else{
                             temp2 = tempOld.substring(9,10)
                         }
-                        if (temp1!==temp2 && tempNew!=="") modelFav.append({"name":settings.getValueFor("Favorites/Favorite_"+a,"")});
+                        if (temp1!==temp2 && tempNew.length !== 0) modelFav.append({"name":settings.getValueFor("Favorites/Favorite_"+a,"")});
                     }else{
                         tempNew=settings.getValueFor("Favorites/Favorite_"+a,"")
-                        if (tempNew!=="") modelFav.append({"name":settings.getValueFor("Favorites/Favorite_"+a,"")});
+                        if (tempNew.length !== 0) modelFav.append({"name":settings.getValueFor("Favorites/Favorite_"+a,"")});
                     }
                 }
 

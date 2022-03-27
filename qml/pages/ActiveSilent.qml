@@ -1,5 +1,5 @@
 
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 
 
@@ -41,7 +41,7 @@ Page {
                     }else{
                         noAthanInSilentProfileChecked="1"
                     }
-                    //console.log("noAthanInSilentProfileChecked="+noAthanInSilentProfileChecked)
+                    ////console.log("noAthanInSilentProfileChecked="+noAthanInSilentProfileChecked)
                     settings.saveValueFor("noAthanInSilentProfileChecked",noAthanInSilentProfileChecked)
                 }
             }
@@ -82,7 +82,7 @@ Page {
                     value: minSilentActiveAfterAthanvalue
                     onValueChanged: {
                         minSilentActiveAfterAthanvalue=minSilentActiveAfterAthan.value.toFixed(0)
-                        console.log("minSilentActiveAfterAthanvalue="+minSilentActiveAfterAthanvalue)
+                        //console.log("minSilentActiveAfterAthanvalue="+minSilentActiveAfterAthanvalue)
                         settings.saveValueFor("minSilentActiveAfterAthanvalue",minSilentActiveAfterAthanvalue)
                     }
                 }
@@ -105,7 +105,7 @@ Page {
                     value: minSilentActivedurationvalue
                     onValueChanged: {
                         minSilentActivedurationvalue=minSilentActiveduration.value.toFixed(0)
-                        console.log("minSilentActivedurationvalue="+minSilentActivedurationvalue)
+                        //console.log("minSilentActivedurationvalue="+minSilentActivedurationvalue)
                         settings.saveValueFor("minSilentActivedurationvalue",minSilentActivedurationvalue)
                     }
                 }
@@ -150,7 +150,7 @@ Page {
                     value: minSilentActiveBeforAthanJommoaavalue
                     onValueChanged: {
                         minSilentActiveBeforAthanJommoaavalue=minSilentActiveBeforAthanJommoaa.value.toFixed(0)
-                        console.log("minSilentActiveBeforAthanJommoaavalue="+minSilentActiveBeforAthanJommoaavalue)
+                        //console.log("minSilentActiveBeforAthanJommoaavalue="+minSilentActiveBeforAthanJommoaavalue)
                         settings.saveValueFor("minSilentActiveBeforAthanJommoaavalue",minSilentActiveBeforAthanJommoaavalue)
                     }
                 }
@@ -173,7 +173,7 @@ Page {
                     value: minSilentActiveAfterAthanJommoaavalue
                     onValueChanged: {
                         minSilentActiveAfterAthanJommoaavalue=minSilentActiveAfterAthanJommoaa.value.toFixed(0)
-                        console.log("minSilentActiveAfterAthanJommoaavalue="+minSilentActiveAfterAthanJommoaavalue)
+                        //console.log("minSilentActiveAfterAthanJommoaavalue="+minSilentActiveAfterAthanJommoaavalue)
                         settings.saveValueFor("minSilentActiveAfterAthanJommoaavalue",minSilentActiveAfterAthanJommoaavalue)
                     }
                 }
@@ -215,7 +215,7 @@ Page {
                 value: minSilentDuringTarawihvalue
                 onValueChanged: {
                     minSilentDuringTarawihvalue=minSilentDuringTarawih.value.toFixed(0)
-                    console.log("minSilentDuringTarawihvalue="+minSilentDuringTarawihvalue)
+                    //console.log("minSilentDuringTarawihvalue="+minSilentDuringTarawihvalue)
                     settings.saveValueFor("minSilentDuringTarawihvalue",minSilentDuringTarawihvalue)
                 }
             }
@@ -229,7 +229,7 @@ Page {
             base = base.substring(0, base.lastIndexOf("."));
        return base;
     }
-    onStateChanged: {
+    onStatusChanged: {
 
     }
 

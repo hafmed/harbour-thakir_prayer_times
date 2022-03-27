@@ -1,5 +1,5 @@
 ﻿
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.thakir_prayer_times.hafgps 1.0
 
@@ -24,7 +24,7 @@ Page {
     Dialog {
         id: locationStatusDialog
         DialogHeader {
-            title: qsTr("Enable Location Services: You must have Location Services turned on to use GPS ...Go to your device's Settings menu and select Location.")
+            title: qsTr("Enable Location Services: You must have Location Services turned on to use GPS... Go first to your device's Settings menu and select Location and restart the application.")
         }
     }
     SilicaFlickable {
@@ -195,6 +195,7 @@ Page {
                 id: button_GPS
                 text:  qsTr("Start GPS")
                 width: parent.width/2
+                icon.source: "image://theme/icon-m-gps?"
                 onClicked: {
                     if (calculcpp.locationEnabled() === true){
                         copyCoordGPS=true;
@@ -244,7 +245,7 @@ Page {
                         dst='1'
                         break
                     }
-                    console.log("dst="+dst)
+                    //console.log("dst="+dst)
                     settings.saveValueFor("dst",dst)
                 }
 
@@ -522,7 +523,7 @@ Page {
             }
         }
     }
-    onStateChanged: {
+    onStatusChanged: {
         if (status !== PageStatus.Active) {
            //rootGps.destroy()
             copyCoordGPS=false;

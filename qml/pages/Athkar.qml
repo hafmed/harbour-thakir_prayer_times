@@ -1,5 +1,5 @@
 ﻿//-----1-12-2018-------------------
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.thakir_prayer_times.calculcpp 1.0
 
@@ -76,11 +76,11 @@ function gettextathkar(textAthkar_textID){
 Connections {
     target: calculcpp
     onSendToQmlDurationMedia :{
-        //console.log("from C++--durat: " + durat/1000)
+        ////console.log("from C++--durat: " + durat/1000)
         progressBar_positionMedia.maximumValue=durat/1000
     }
     onPositionChanged :{
-        //console.log("from C++--iPosition: " + iPosition/1000)
+        ////console.log("from C++--iPosition: " + iPosition/1000)
         progressBar_positionMedia.value=iPosition/1000
     }
 }
@@ -174,7 +174,7 @@ ProgressBar {
     }
    }
   }
-    onStateChanged: {
+    onStatusChanged: {
         if (status !== PageStatus.Active) {
             //-----
         }

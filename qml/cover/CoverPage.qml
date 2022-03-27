@@ -1,5 +1,5 @@
 
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import "../pages"
 
@@ -15,7 +15,7 @@ CoverBackground {
 //            reset();
 //            seconds= calculcpp.remaining_time_haf_Sec();
 //            minutes=0;
-//            console.log("seconds: " + calculcpp.remaining_time_haf_Sec())
+//            //console.log("seconds: " + calculcpp.remaining_time_haf_Sec())
 //            temp1.text="sec:" + calculcpp.remaining_time_haf_Sec();
 //            temp2.text="insomniacRun="+insomniac.running
 //            start();
@@ -23,10 +23,12 @@ CoverBackground {
 //    }
  Column {
      id: column
-     anchors.centerIn: parent
+     spacing: uiArabic ? Theme.paddingSmall : Theme.paddingMedium
+    // anchors.centerIn: parent
      width: parent.width
-     height: parent.height
-     spacing: Theme.paddingSmall
+     height: parent.height-enableAthan.height-enableAthanicon.height
+     anchors.bottom: top.enableAthan
+     anchors.top: top.parent
     Label {
         id: label
         width: parent.width
@@ -128,9 +130,10 @@ CoverBackground {
 
 
     CoverActionList {
-        id: enableAthan;
+        id: enableAthan
 
         CoverAction {
+            id:enableAthanicon
             iconSource: adhan_Fajr===0 ? "image://theme/icon-m-speaker":"image://theme/icon-m-speaker-mute"
             onTriggered:{
                 if (athan_Fajr_Old==0) athan_Fajr_Old=1;

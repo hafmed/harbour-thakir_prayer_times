@@ -1,5 +1,5 @@
 
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import QtQuick.XmlListModel 2.0
 
@@ -92,8 +92,8 @@ Page {
                                  }
 
                                  method=Math.floor(model.method)
-                                 console.log("tzone-----="+tzone)
-                                 console.log("method-----="+method)
+                                 //console.log("tzone-----="+tzone)
+                                 //console.log("method-----="+method)
                                 //get_method(index_pays)
                                  if (model.name_en==="United States" || model.name_en==="Canada" || model.name_en==="Belgium" || model.name_en==="Australia"){
                                      payhasstate=true;

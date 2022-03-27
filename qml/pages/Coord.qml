@@ -1,5 +1,5 @@
 
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import QtQuick.XmlListModel 2.0
 
@@ -19,17 +19,17 @@ Page {
     function covertcoordinatesCityLat(coordinatesCity) {
         latstringcoor=coordinatesCity.substring(0,coordinatesCity.indexOf(" "));
 
-        console.log("LAT:");
+        //console.log("LAT:");
         if (latstringcoor.length===6) {
             latdeg=latstringcoor.substring(0,2);
             latmin=latstringcoor.substring(3,5);
             latNS=latstringcoor.substring(5);
             latsec=0;
 
-            console.log(latdeg);
-            console.log(latmin);
-            console.log(latsec);
-            console.log(latNS);
+            //console.log(latdeg);
+            //console.log(latmin);
+            //console.log(latsec);
+            //console.log(latNS);
         }
         if (latstringcoor.length===9) {
             latdeg=latstringcoor.substring(0,2);
@@ -37,10 +37,10 @@ Page {
             latsec=latstringcoor.substring(6,8);
             latNS=latstringcoor.substring(8);
 
-            console.log(latdeg);
-            console.log(latmin);
-            console.log(latsec);
-            console.log(latNS);
+            //console.log(latdeg);
+            //console.log(latmin);
+            //console.log(latsec);
+            //console.log(latNS);
         }
         if (latstringcoor.length===8) {
             latdeg=latstringcoor.substring(0,2);
@@ -48,10 +48,10 @@ Page {
             latsec=latstringcoor.substring(6,8);
             latNS="N";
 
-            console.log(latdeg);
-            console.log(latmin);
-            console.log(latsec);
-            console.log(latNS);
+            //console.log(latdeg);
+            //console.log(latmin);
+            //console.log(latsec);
+            //console.log(latNS);
         }
 
         var conferLat=Math.round(latdeg)+latmin/60+latsec/3600;
@@ -67,7 +67,7 @@ Page {
     function covertcoordinatesCityLongi(coordinatesCity) {
         longistringcoor=coordinatesCity.substring(coordinatesCity.indexOf(" ")+1);
 
-        console.log("LONGI:");
+        //console.log("LONGI:");
 
         if (longistringcoor.length===7) {
             longideg=longistringcoor.substring(0,3);
@@ -75,10 +75,10 @@ Page {
             longiEW=longistringcoor.substring(6);
             longisec=0;
 
-            console.log(longideg);
-            console.log(longimin);
-            console.log(longisec);
-            console.log(longiEW);
+            //console.log(longideg);
+            //console.log(longimin);
+            //console.log(longisec);
+            //console.log(longiEW);
         }
         if (longistringcoor.length===10) {
             longideg=longistringcoor.substring(0,3);
@@ -86,10 +86,10 @@ Page {
             longisec=longistringcoor.substring(7,9);
             longiEW=longistringcoor.substring(9);
 
-            console.log(longideg);
-            console.log(longimin);
-            console.log(longisec);
-            console.log(longiEW);
+            //console.log(longideg);
+            //console.log(longimin);
+            //console.log(longisec);
+            //console.log(longiEW);
         }
         if (longistringcoor.length===9) {
             longideg=longistringcoor.substring(0,3);
@@ -97,10 +97,10 @@ Page {
             longisec=longistringcoor.substring(7,9);
             longiEW="E";
 
-            console.log(longideg);
-            console.log(longimin);
-            console.log(longisec);
-            console.log(longiEW);
+            //console.log(longideg);
+            //console.log(longimin);
+            //console.log(longisec);
+            //console.log(longiEW);
         }
 
         var conferLongi=Math.round(longideg)+longimin/60+longisec/3600;
