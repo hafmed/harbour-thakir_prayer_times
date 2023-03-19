@@ -1,0 +1,2 @@
+hi, I will like to add my app QuickLaunch into chum, and the first think I need to do is to get a user for the OBS server, right?	06:15
+mal	dracks[m]: yes, you can talk to lbt here about getting account for obs, you need to provide him your email and the username you want to have, you can also send the info to him in private
