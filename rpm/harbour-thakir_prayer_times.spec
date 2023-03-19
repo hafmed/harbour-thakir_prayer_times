@@ -29,6 +29,7 @@ BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(keepalive)
 BuildRequires:  desktop-file-utils
+Requires: qt5-qtdeclarative-import-multimedia >= 5.2
 
 %description
 “Thakir Prayer Times” provides Prayer times for Sailfish OS.
