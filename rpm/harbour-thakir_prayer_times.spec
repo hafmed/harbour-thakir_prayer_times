@@ -25,6 +25,7 @@ Requires:   qt5-qtdeclarative-import-xmllistmodel
 Requires:   nemo-qml-plugin-contextkit-qt5
 BuildRequires:  pkgconfig(sailfishapp) >= 0.0.10
 BuildRequires:  pkgconfig(Qt5Multimedia)
+BuildRequires:  pkgconfig(Qt5Xml)
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Core)
