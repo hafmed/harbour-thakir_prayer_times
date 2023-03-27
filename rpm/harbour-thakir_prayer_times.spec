@@ -16,7 +16,7 @@ Summary:    “Thakir Prayer Times” provides Prayer times for Sailfish OS.
 Version:    4.0.29
 Release:    1
 Group:      Qt/Qt
-License:    LICENSE
+License:    GPLv3
 URL:        https://sites.google.com/site/thakirprayertimes/thakir-prayer-times-en
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-thakir_prayer_times.yaml
