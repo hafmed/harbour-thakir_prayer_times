@@ -33,7 +33,7 @@ BuildRequires:  pkgconfig(keepalive)
 BuildRequires:  desktop-file-utils
 
 %description
-“Thakir Prayer Times” provides Prayer times for Sailfish OS.
+Thakir Prayer Times provides Prayer times for Sailfish OS.
 
 # This description section includes metadata for SailfishOS:Chum, see
 # https://github.com/sailfishos-chum/main/blob/main/Metadata.md
