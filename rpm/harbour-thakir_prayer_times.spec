@@ -59,6 +59,7 @@ Url:
 
 %changelog
  - Minor SFOS 4.5 fixes
+ - Added Chum metadata
 
 %prep
 %setup -q -n %{name}-%{version}
