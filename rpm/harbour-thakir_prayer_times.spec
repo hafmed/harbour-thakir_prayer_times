@@ -12,7 +12,7 @@ Name:       harbour-thakir_prayer_times
 %{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
-Summary:    “Thakir Prayer Times” provides Prayer times for Sailfish OS.
+Summary:    Thakir Prayer Times provides Prayer times for Sailfish OS
 Version:    4.0.29
 Release:    1
 Group:      Qt/Qt
