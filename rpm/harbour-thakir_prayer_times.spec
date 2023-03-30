@@ -57,6 +57,10 @@ Url:
   #Donation: https://www.paypal.me/piggz
 %endif
 
+%changelog
+ - Minor SFOS 4.5 fixes
+ - Added Chum metadata
+
 %prep
 %setup -q -n %{name}-%{version}
 
