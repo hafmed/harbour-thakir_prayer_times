@@ -37,7 +37,7 @@ Thakir Prayer Times provides Prayer times for Sailfish OS.
 
 # This description section includes metadata for SailfishOS:Chum, see
 # https://github.com/sailfishos-chum/main/blob/main/Metadata.md
-%if 0%{?_chum}
+%if "%{?vendor}" == "chum"
 PackageName: Thakir Prayer Times
 Type: desktop-application
 DeveloperName: HAFIANE Mohamed
