@@ -375,8 +375,8 @@ Page {
             }
             Button {
                 id: remaining_time_text
-                text:(athanIsPlaying === true) ? qsTr("Stop Adhan")  : (remaining_time.charAt(2) == "N" || remaining_time.charAt(2)=="n" ) ? "--:--"  : remaining_time
-                width: (displayInfo_dpiWidth - displayInfo_dpiMarge) / 3.
+                text:(athanIsPlaying === true) ? qsTr("Stop Adhan/Athkar")  : (remaining_time.charAt(2) == "N" || remaining_time.charAt(2)=="n" ) ? "--:--"  : remaining_time
+                width: (athanIsPlaying === true) ? (displayInfo_dpiWidth - displayInfo_dpiMarge) / 2. : (displayInfo_dpiWidth - displayInfo_dpiMarge) / 3.
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
                     calculcpp.haftimersplayall()

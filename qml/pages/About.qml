@@ -7,7 +7,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
-    property string version: "4.0.29"
+    property string version: "4.0.31"
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
@@ -39,7 +39,7 @@ Page {
                 text:
                     "Thakir Prayer Times \n"+
                     "Version "+version+"\n"+
-                    "5-3-2023 for openrepos.net and harbour.jolla\n"+ //for openrepos.net //harbour.jolla
+                    "1-4-2023 for openrepos.net and harbour.jolla\n"+ //for openrepos.net //harbour.jolla
                     "By Mohamed HAFIANE,"
             }
             Label {
