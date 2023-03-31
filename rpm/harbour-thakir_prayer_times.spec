@@ -13,7 +13,7 @@ Name:       harbour-thakir_prayer_times
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Provides Prayer times for Sailfish OS
-Version:    4.0.29
+Version:    4.0.31
 Release:    1
 Group:      Qt/Qt
 License:    GPLv3
@@ -103,5 +103,5 @@ desktop-file-install --delete-original       \
 # << files
 
 %changelog
- - Minor SFOS 4.5 fixes
- - Added Chum metadata
+ *Minor SFOS 4.5 fixes
+ *Added Chum metadata
