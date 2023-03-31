@@ -504,8 +504,8 @@
         <translation>İkindi</translation>
     </message>
     <message>
-        <source>Stop Adhan</source>
-        <translation>Ezanı durdur</translation>
+        <source>Stop Adhan/Athkar</source>
+        <translation>Ezan/Azkar durdurmak</translation>
     </message>
 </context>
 <context>
@@ -752,6 +752,10 @@
         <translation>Dil Seçimi</translation>
     </message>
     <message>
+        <source>Enable Location Services: You must have Location Services turned on to use GPS... Go first to your device&apos;s Settings menu and select Location and restart the application.</source>
+        <translation>Konum Servislerini Etkinleştir: GPS&apos;i kullanmak için Konum Servislerini açmış olmanız gerekir... Önce cihazınızın Ayarlar menüsüne gidin ve Konum&apos;u seçin ve uygulamayı yeniden başlatın.</translation>
+    </message>
+    <message>
         <source>Egyptian General Authority of Survey</source>
         <translation type="unfinished"></translation>
     </message>
@@ -906,10 +910,6 @@
     <message>
         <source>ANGLE_BASED</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable Location Services: You must have Location Services turned on to use GPS... Go first to your device&apos;s Settings menu and select Location and restart the application.</source>
-        <translation>Konum Servislerini Etkinleştir: GPS&apos;i kullanmak için Konum Servislerini açmış olmanız gerekir... Önce cihazınızın Ayarlar menüsüne gidin ve Konum&apos;u seçin ve uygulamayı yeniden başlatın.</translation>
     </message>
 </context>
 <context>

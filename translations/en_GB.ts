@@ -289,31 +289,6 @@
 <context>
     <name>Ayat</name>
     <message>
-        <location filename="../qml/pages/Ayat.qml" line="148"/>
-        <source>Show Tafssir/Translation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Ayat.qml" line="148"/>
-        <source>Show Quran</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Ayat.qml" line="246"/>
-        <source>Share Aya</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Ayat.qml" line="333"/>
-        <source>Sourat: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Ayat.qml" line="332"/>
-        <source>(Tafssir muyassar)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qml/pages/Ayat.qml" line="31"/>
         <source>Thakir Prayer Times</source>
         <translation type="unfinished"></translation>
@@ -329,6 +304,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/Ayat.qml" line="35"/>
+        <source>Can&apos;t play soura! Download it first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/Ayat.qml" line="36"/>
         <source>Click on this notification to go to the page of downloading.</source>
         <translation type="unfinished"></translation>
@@ -339,28 +319,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Ayat.qml" line="333"/>
-        <source>(Tafssir jalalayn)</source>
+        <location filename="../qml/pages/Ayat.qml" line="148"/>
+        <source>Show Tafssir/Translation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Ayat.qml" line="333"/>
-        <source>(Translation)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Ayat.qml" line="231"/>
-        <source>Copy this Aya</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Ayat.qml" line="35"/>
-        <source>Can&apos;t play soura! Download it first.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Ayat.qml" line="234"/>
-        <source>Aya is copied to clipboard.</source>
+        <location filename="../qml/pages/Ayat.qml" line="148"/>
+        <source>Show Quran</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -369,8 +334,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/Ayat.qml" line="231"/>
+        <source>Copy this Aya</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Ayat.qml" line="234"/>
+        <source>Aya is copied to clipboard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/Ayat.qml" line="238"/>
         <source>Share</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Ayat.qml" line="246"/>
+        <source>Share Aya</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Ayat.qml" line="332"/>
+        <source>(Tafssir muyassar)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Ayat.qml" line="333"/>
+        <source>Sourat: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Ayat.qml" line="333"/>
+        <source>(Tafssir jalalayn)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Ayat.qml" line="333"/>
+        <source>(Translation)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -628,7 +628,7 @@
     </message>
     <message>
         <location filename="../qml/pages/PrayerTimes.qml" line="378"/>
-        <source>Stop Adhan</source>
+        <source>Stop Adhan/Athkar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -704,23 +704,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/Settings-Quran.qml" line="38"/>
+        <source>Load Quran translation XML file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/Settings-Quran.qml" line="67"/>
         <source>Settings Quran</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-Quran.qml" line="84"/>
-        <source>Simple plain</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-Quran.qml" line="113"/>
-        <source>ar.muyassar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-Quran.qml" line="116"/>
-        <source>ar.jalalayn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -729,8 +719,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-Quran.qml" line="38"/>
-        <source>Load Quran translation XML file</source>
+        <location filename="../qml/pages/Settings-Quran.qml" line="84"/>
+        <source>Simple plain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -742,6 +732,16 @@
     <message>
         <location filename="../qml/pages/Settings-Quran.qml" line="109"/>
         <source>Taffssir/Translations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-Quran.qml" line="113"/>
+        <source>ar.muyassar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-Quran.qml" line="116"/>
+        <source>ar.jalalayn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

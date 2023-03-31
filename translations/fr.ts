@@ -629,8 +629,8 @@
     </message>
     <message>
         <location filename="../qml/pages/PrayerTimes.qml" line="378"/>
-        <source>Stop Adhan</source>
-        <translation>Arrêter Adhan</translation>
+        <source>Stop Adhan/Athkar</source>
+        <translation>Arrêt Adhan/Athkar</translation>
     </message>
 </context>
 <context>
