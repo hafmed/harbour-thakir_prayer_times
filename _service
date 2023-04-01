@@ -3,6 +3,6 @@
     <service name="tar_git">
     <param name="url">https://github.com/hafmed/harbour-thakir_prayer_times</param>
     <param name="branch">master</param>
-    <param name="revision">v4.0.31-9</param>
+    <param name="revision">v4.0.31-10</param>
     </service>
 </services>
