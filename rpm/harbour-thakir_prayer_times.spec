@@ -14,7 +14,7 @@ Name:       harbour-thakir_prayer_times
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Provides Prayer times for Sailfish OS
 Version:    4.0.31
-Release:    9
+Release:    10
 Group:      Qt/Qt
 License:    GPLv3
 URL:        https://sites.google.com/site/thakirprayertimes/thakir-prayer-times-en

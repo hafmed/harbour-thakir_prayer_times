@@ -2,7 +2,7 @@
 Name: harbour-thakir_prayer_times
 Summary: Provides Prayer times for Sailfish OS
 Version: 4.0.31
-Release: 9
+Release: 10
 # The contents of the Group field should be one of the groups listed here:
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
 Group: Qt/Qt
