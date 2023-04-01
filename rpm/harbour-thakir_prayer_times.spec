@@ -45,11 +45,11 @@ Categories:
  - Utility
 Custom:
   Repo: https://github.com/hafmed/harbour-thakir_prayer_times
-Icon: https://github.com/hafmed/harbour-thakir_prayer_times/blob/master/appicons/172x172/apps/harbour-thakir_prayer_times.png
+Icon: https://github.com/hafmed/harbour-thakir_prayer_times/raw/master/appicons/172x172/apps/harbour-thakir_prayer_times.png
 Screenshots:
- - https://github.com/hafmed/harbour-thakir_prayer_times/blob/master/screenshots/Screenshot1.png
- - https://github.com/hafmed/harbour-thakir_prayer_times/blob/master/screenshots/Screenshot2.png
- - https://github.com/hafmed/harbour-thakir_prayer_times/blob/master/screenshots/Screenshot3.png
+ - https://github.com/hafmed/harbour-thakir_prayer_times/raw/master/screenshots/Screenshot1.png
+ - https://github.com/hafmed/harbour-thakir_prayer_times/raw/master/screenshots/Screenshot2.png
+ - https://github.com/hafmed/harbour-thakir_prayer_times/raw/master/screenshots/Screenshot3.png
 Url:
   Homepage: https://github.com/hafmed/harbour-thakir_prayer_times
   Bugtracker: https://github.com/hafmed/harbour-thakir_prayer_times/issues
