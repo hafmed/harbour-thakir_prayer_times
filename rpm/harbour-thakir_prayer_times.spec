@@ -14,7 +14,7 @@ Name:       harbour-thakir_prayer_times
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Provides Prayer times for Sailfish OS
 Version:    4.0.31
-Release:    1
+Release:    9
 Group:      Qt/Qt
 License:    GPLv3
 URL:        https://sites.google.com/site/thakirprayertimes/thakir-prayer-times-en
@@ -37,7 +37,7 @@ Thakir Prayer Times provides Prayer times for Sailfish OS.
 
 # This description section includes metadata for SailfishOS:Chum, see
 # https://github.com/sailfishos-chum/main/blob/main/Metadata.md
-%if "%{?vendor}" == "chum"
+%if 0%{?_chum}
 PackageName: Thakir Prayer Times
 Type: desktop-application
 DeveloperName: HAFIANE Mohamed
@@ -45,16 +45,14 @@ Categories:
  - Utility
 Custom:
   Repo: https://github.com/hafmed/harbour-thakir_prayer_times
-Icon: https://github.com/hafmed/harbour-thakir_prayer_times/blob/master/icon-thakir_sailfish_Quran_new.svg
+Icon: https://github.com/hafmed/harbour-thakir_prayer_times/blob/master/appicons/172x172/apps/harbour-thakir_prayer_times.png
 Screenshots:
  - https://github.com/hafmed/harbour-thakir_prayer_times/blob/master/screenshots/Screenshot1.png
  - https://github.com/hafmed/harbour-thakir_prayer_times/blob/master/screenshots/Screenshot2.png
  - https://github.com/hafmed/harbour-thakir_prayer_times/blob/master/screenshots/Screenshot3.png
 Url:
   Homepage: https://github.com/hafmed/harbour-thakir_prayer_times
-  #Help: https://github.com/piggz/harbour-advanced-camera/discussions
   Bugtracker: https://github.com/hafmed/harbour-thakir_prayer_times/issues
-  #Donation: https://www.paypal.me/piggz
 %endif
 
 %prep
