@@ -1,0 +1,13 @@
+[Unit]
+Description=Thakir Prayer Times daemon (per-user)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/harbour-thakir_prayer_times-daemon
+Restart=on-failure
+# Run as the nemo user on Sailfish devices; adjust if you prefer a different user
+User=nemo
+
+[Install]
+WantedBy=multi-user.target

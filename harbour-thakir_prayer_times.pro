@@ -77,7 +77,7 @@ OTHER_FILES += qml/pages/*.qml \
 INSTALLS += desktop appicons qml sounds translations files
 
 TEMPLATE = subdirs
-SUBDIRS = src
+SUBDIRS = src daemon
 
 DISTFILES += \
     qml/pages/SettingsLocation.qml \
@@ -85,4 +85,3 @@ DISTFILES += \
     rpm/harbour-thakir_prayer_times.changes \
     qml/pages/Quibla.qml \
     qml/pages/AlertSettings.qml
-

@@ -86,6 +86,24 @@ desktop-file-install --delete-original       \
   --dir %{buildroot}%{_datadir}/applications             \
    %{buildroot}%{_datadir}/applications/*.desktop
 
+# Enable/disable the daemon service on install/uninstall (best-effort)
+%post
+if command -v systemctl >/dev/null 2>&1; then
+  systemctl daemon-reload >/dev/null 2>&1 || true
+  systemctl enable --now harbour-thakir_prayer_times-daemon.service >/dev/null 2>&1 || true
+fi
+
+%preun
+if [ "$1" -eq 0 ] && command -v systemctl >/dev/null 2>&1; then
+  systemctl stop --no-block harbour-thakir_prayer_times-daemon.service >/dev/null 2>&1 || true
+  systemctl disable harbour-thakir_prayer_times-daemon.service >/dev/null 2>&1 || true
+fi
+
+%postun
+if command -v systemctl >/dev/null 2>&1; then
+  systemctl daemon-reload >/dev/null 2>&1 || true
+fi
+
 %files
 %defattr(-,root,root,-)
 %defattr(644,root,root,755)
@@ -97,5 +115,7 @@ desktop-file-install --delete-original       \
 %{_datadir}/%{name}/qml
 %{_datadir}/%{name}/sounds
 %{_bindir}/%{name}
+%{_bindir}/harbour-thakir_prayer_times-daemon
+%{_unitdir}/harbour-thakir_prayer_times-daemon.service
 # >> files
 # << files
